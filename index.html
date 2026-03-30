@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cat Clicker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-50 flex flex-col">
+  <div id="app" class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-10 bg-white shadow-sm py-3 px-6 flex items-center justify-center">
+      <p class="text-gray-700 font-semibold text-lg">
+        Clicks: <span id="click-counter" class="text-purple-600">0</span>
+      </p>
+    </header>
+
+    <main class="flex-1 flex items-center justify-center p-6">
+      <div id="cat-container" class="flex flex-col items-center gap-6">
+        <img
+          id="cat"
+          src="https://cataas.com/cat"
+          alt="An interactive cat waiting to be clicked"
+          tabindex="0"
+          role="button"
+          class="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover rounded-2xl shadow-lg cursor-pointer select-none"
+        />
+        <div
+          id="reaction-display"
+          class="text-sm sm:text-base md:text-lg text-center min-h-[2rem] font-medium"
+          aria-live="polite"
+        ></div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
