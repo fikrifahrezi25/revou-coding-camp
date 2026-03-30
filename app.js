@@ -119,4 +119,40 @@ function applyAnimation(catEl, animationClass) {
   );
 }
 
-export { state, reactions, getRandomReaction, updateCounter, renderReaction, applyAnimation };
+/**
+ * Handles a cat click: increments counter, picks a new reaction, renders it, and animates the cat.
+ * @param {{ clickCount: number, lastReactionIndex: number }} state - Mutable app state
+ * @param {Array} pool - The reaction pool array
+ */
+function handleCatClick(state, pool) {
+  state.clickCount += 1;
+
+  const result = getRandomReaction(state.lastReactionIndex, pool);
+  if (!result) return;
+
+  state.lastReactionIndex = result.index;
+
+  renderReaction(result.reaction);
+
+  const catEl = document.querySelector("#cat");
+  if (catEl) applyAnimation(catEl, result.reaction.animation);
+
+  updateCounter(state.clickCount);
+}
+
+// Wire up event listeners
+const catEl = document.querySelector("#cat");
+if (catEl) {
+  // Task 5.2 — click handler
+  catEl.addEventListener("click", () => handleCatClick(state, reactions));
+
+  // Task 5.3 — keyboard accessibility (Enter or Space triggers click)
+  catEl.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      catEl.click();
+    }
+  });
+}
+
+export { state, reactions, getRandomReaction, updateCounter, renderReaction, applyAnimation, handleCatClick };
